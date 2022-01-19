@@ -1,13 +1,12 @@
-apexcharts
-react-redux
-redux toolkit
-axios
-
 # Simple Forex live wall application
 
 After user inputs a query string and presses the search button, the applications fetches the latest data from server and displays information about currency pair and candlestick chart.
 
 Data updating time frame could be changed by buttons at the top right of the wall.
+
+## Visit
+
+`link` - https://forex-live-wall.vercel.app
 
 ![Header](./public/demo.gif)
 ![Header](./public/demo1.gif)
