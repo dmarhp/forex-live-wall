@@ -8,41 +8,44 @@ import QueryList from '../QueryList/QueryList';
 
 const SearchForm = () => {
   const [inputValue, setInputValue] = useState('');
-  const [status, setStatus] = useState({ isLoading: false, isError: false, wrongRequest: false });
-  const { isLoading, isError, wrongRequest } = status;
+  const [status, setStatus] = useState({ isLoading: false, isError: false });
+  const { isLoading, isError } = status;
   const { currentRate: { ticker } } = useAppSelector((state) => state.rateReducer);
   const dispatch = useAppDispatch();
 
   const onFormSubmit = () => {
-    const pair = inputValue.replaceAll('/', '');
-    setStatus({
-      ...status,
-      isLoading: true,
-    });
+    if (inputValue.match(/([A-Z]{3})\/([A-Z]{3})/)) {
+      const pair = inputValue.replaceAll('/', '');
 
-    axios.get(`${urlBase}fx/${pair}${urlKey}`)
-      .then(({ data }) => {
-        const [newData] = data;
-        const isDataEmpty = !newData.ticker;
-
-        setStatus({
-          isLoading: false,
-          isError: isDataEmpty,
-          wrongRequest: isDataEmpty,
-        });
-
-        if (!isDataEmpty) {
-          dispatch(setNewRateArray(newData));
-          setInputValue('');
-        }
-      })
-      .catch(() => {
-        setStatus({
-          ...status,
-          isLoading: false,
-          isError: true,
-        });
+      setStatus({
+        ...status,
+        isLoading: true,
       });
+
+      axios.get(`${urlBase}fx/${pair}${urlKey}`)
+        .then(({ data }) => {
+          const [newData] = data;
+          const isDataEmpty = !newData.ticker;
+
+          setStatus({
+            isLoading: false,
+            isError: isDataEmpty,
+          });
+
+          if (!isDataEmpty) {
+            dispatch(setNewRateArray(newData));
+            setInputValue('');
+          }
+        })
+        .catch(() => {
+
+        });
+    } else {
+      setStatus({
+        isLoading: false,
+        isError: true,
+      });
+    }
   };
 
   return (
@@ -78,7 +81,9 @@ const SearchForm = () => {
           Oops Something went wrong
         </h3>
 
-        {wrongRequest && <QueryList />}
+        <QueryList
+          toggleClick={((query) => setInputValue(query))}
+        />
       </div>
 
     </div>

@@ -45,6 +45,7 @@
 }
 
 .query-list__list_item{
+  @include clickable-element;
   border-radius: 2px;
   background-color: $col_grey1;
   color: white;

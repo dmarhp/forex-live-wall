@@ -4,7 +4,11 @@ import axios from 'axios';
 import { urlBase, urlKey } from '../../utils/constants';
 import { APIData } from '../../utils/types';
 
-const QueryList = () => {
+interface QueryListProps{
+  toggleClick: (query: string)=> void
+}
+
+const QueryList = ({ toggleClick }:QueryListProps) => {
   const [showList, setShowList] = useState(false);
   const [queryList, setQueryList] = useState<string[]>([]);
   const [queriesToShow, setQueriesToShow] = useState<string[]>([]);
@@ -26,7 +30,8 @@ const QueryList = () => {
       axios.get(`${urlBase}fx${urlKey}`)
         .then(({ data }) => {
           const newList = data.map((item: APIData) => (item.ticker));
-          setQueryList(newList);
+          const filteredList = newList.filter((item:string) => item.length === 7);
+          setQueryList(filteredList);
         });
     }
   }
@@ -50,12 +55,13 @@ const QueryList = () => {
                 className="query-list__list"
               >
                 {queriesToShow.map((item) => (
-                  <div
+                  <button
                     className="query-list__list_item"
+                    onClick={() => { toggleClick(item); }}
                     key={item}
                   >
                     {item}
-                  </div>
+                  </button>
                 ))}
               </div>
             </>
