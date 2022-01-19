@@ -1,52 +1,36 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { createEmptyRateArray, createRateArray } from '../utils/dataLocal';
+import { APIData, RateData, StoreType } from '../utils/types';
+import { createInitialRateArray, createNewRate } from '../utils/utils';
 
-export interface RateData {
-  name: string,
-  data:{ x:string, y: number[] }[]
-}
-
-export interface APIData {
-  ticker: string,
-  bid: string,
-  ask: string,
-  open: string,
-  low: string,
-  high: string,
-  changes: number,
-  date: string
-}
-
-const initialState: RateData[] = [{ name: '1', data: createRateArray() }];
+export const initialState: StoreType = {
+  timeFrame: 5,
+  currentRate: { ticker: '' } as APIData,
+  chartData: [] as RateData[],
+};
 
 export const rateSlice = createSlice({
   name: 'rateSlice',
   initialState,
   reducers: {
-    setNewRateArray: (state:RateData[], { payload }: PayloadAction<APIData>) => {
-      const {
-        date, open, high, low, changes,
-      } = payload;
-      const close = Number((+open + +changes).toFixed(5));
-      const newRateArray = createEmptyRateArray(payload.date);
-
-      newRateArray[newRateArray.length - 1].y = [+open, +high, +low, close];
-
-      return [{ name: date, data: newRateArray }];
+    setNewRateArray: (state:StoreType, { payload }:PayloadAction<APIData>) => {
+      state.currentRate = payload;
+      state.chartData = createInitialRateArray(payload);
     },
-    addNewRate: (state: RateData[], { payload }: PayloadAction<APIData>) => {
-      const {
-        date, open, high, low, changes,
-      } = payload;
-      const close = Number((+open + +changes).toFixed(5));
-      const newItem = { x: date, y: [+open, +high, +low, close] };
 
-      state[0].data.push(newItem);
-      state[0].data.shift();
-      state[0].name = date; // toString?
+    addNewRate: (state:StoreType, { payload }: PayloadAction<APIData>) => {
+      const { data } = state.chartData[0];
+      data.shift();
+      data.push(createNewRate(payload));
+
+      state.currentRate = payload;
+      state.chartData = [{ name: payload.date, data }];
+    },
+
+    setTimeFrame: (state: StoreType, { payload }: PayloadAction<number>) => {
+      state.timeFrame = payload;
     },
   },
 });
 
-export const { addNewRate, setNewRateArray } = rateSlice.actions;
+export const { setNewRateArray, addNewRate, setTimeFrame } = rateSlice.actions;
 export default rateSlice.reducer;

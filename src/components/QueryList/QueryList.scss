@@ -1,0 +1,58 @@
+@import "../../styles/helper";
+
+.query-list__wrapper{
+  background-color: $col_main3;
+}
+
+.query-list{
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+  margin: 0 auto;
+}
+
+.query-list__title{
+  font-size: 20px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.query-list__button{
+  margin: 0 auto;
+  @include clickable-element;
+  background-color: $col_main2;
+  width: fit-content;
+}
+
+.query-list__search{
+  @include clickable-element;
+
+  &:focus, &:active{
+    background-color: $col_main2;
+  }
+  cursor: text;
+}
+
+.query-list__list{
+  display: grid;
+  grid-template-columns: repeat(9,10%);
+  grid-auto-columns: auto;
+  row-gap: 10px;
+  column-gap: 10px;
+  padding: 10px 0;
+  border-radius: 2px;
+}
+
+.query-list__list_item{
+  border-radius: 2px;
+  background-color: $col_grey1;
+  color: white;
+  font-size: 14px;
+  padding: 5px 10px;
+  transition: background-color linear 0.3s;
+
+  &:hover{
+    background-color: $col_grey2;
+  }
+}

@@ -1,0 +1,36 @@
+@import "../../styles/helper";
+
+.settings__wrapper{
+  @include flex-center;
+
+  flex-direction: column;
+  gap: 2px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.settings__title{
+  font-size: 20px;
+
+}
+
+.settings__button_wrapper{
+  @include flex-center;
+  column-gap: 5px;
+}
+
+.settings__button {
+  color: white;
+  font-weight: 500;
+  background-color: $col_grey1;
+
+  @include clickable-element;
+
+  &:hover{
+    background-color: $col_grey2;
+  }
+}
+
+.settings__button-active{
+  background-color: $col_main1;
+}

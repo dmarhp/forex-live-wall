@@ -1,0 +1,55 @@
+@import "../../styles/helper";
+
+.rates__wrapper{
+  width: 100%;
+}
+
+.rates{
+  padding: 10px;
+  width: 80%;
+  border-radius: 2px;
+  margin: 0 auto;
+  background-color: $col_grey1;
+}
+
+.rates__ticker{
+  font-size: 20px;
+  padding: 5px;
+  border-radius: 2px;
+  background-color: #EEEEEE;
+  margin-bottom: 5px;
+}
+
+.rates__data_wrapper{
+  @include flex-center;
+
+  row-gap: 5px;
+  flex-direction: column;
+}
+
+.rates__data{
+  display: grid;
+  grid-template-columns: 30% 70%;
+}
+
+.rates__data_key{
+  color: white;
+  padding: 5px;
+
+}
+
+.rates__data_value{
+  background-color: #EEEEEE;
+  padding: 5px;
+  font-weight: 500;
+
+}
+
+.rates__data_changes-positive{
+  color: green;
+}
+
+.rates__data_changes-negative{
+  color: red;
+}
+

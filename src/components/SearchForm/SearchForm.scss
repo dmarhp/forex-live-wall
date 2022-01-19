@@ -1,0 +1,91 @@
+@import "../../styles/helper";
+
+
+.form__wrapper {
+  @include flex-center;
+
+  background-color: $col_main3;
+  transition: all linear 0.5s;
+  padding: 50px;
+  flex-direction: column;
+  min-height: 10vh;
+  height: fit-content;
+  position: relative;
+}
+
+.form__start {
+  min-height: 100vh;
+  padding: 0;
+}
+
+.form__title {
+  font-family: $font_cabin;
+  font-size: 80px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.form {
+  @include flex-center;
+
+  gap: 20px;
+  width: 60%;
+  margin: 0 auto;
+}
+
+.form__input {
+  width: 80%;
+  transition: background-color linear 0.3s;
+
+  @include clickable-element;
+
+  &:focus{
+    background-color: $col_main2;
+  }
+
+}
+
+.form__button {
+  background-color: #fff;
+  border: none;
+  border-radius: 2px;
+  font-size: 16px;
+  padding: 5px 10px;
+  transition: all linear 0.3s;
+  width: 20%;
+
+  &:hover {
+    box-shadow: $box_sh1;
+  }
+
+  &:focus {
+    box-shadow: $box_sh2;
+    outline: none;
+  }
+
+  &:active {
+    background-color: #5C80BC;
+  }
+}
+
+.form__button-loading {
+  animation: spin 1s linear infinite
+}
+
+.form__error{
+  transition: height ease-in-out 0.5s;
+  margin-top: 20px;
+  height: 5vh;
+}
+
+.form__error-hidden{
+  height: 0;
+  overflow: hidden;
+}
+
+.form__error_title{
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 10px;
+  text-align: center;
+}

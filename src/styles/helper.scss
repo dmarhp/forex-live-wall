@@ -1,0 +1,34 @@
+$box_sh1: 0 10px 30px rgba(0, 0, 0, 0.06), 0 6px 6px rgba(0, 0, 0, 0.06);
+$box_sh2: 0 10px 30px rgba(0, 0, 0, 0.12), 0 6px 6px rgba(0, 0, 0, 0.1);
+
+$font_cabin: 'Cabin Sketch', cursive;
+$font_roboto: 'Roboto', sans-serif;
+
+$col_main1: #5C80BC;
+$col_main2: #E8C547;
+$col_main3: #CDD1C4;
+$col_grey1: #4D5061;
+$col_grey2: #30323D;
+
+@mixin clickable-element{
+  border: none;
+  border-radius: 2px;
+  padding: 10px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all linear 0.3s;
+
+  &:hover{
+    box-shadow: $box_sh1;
+  }
+  &:focus{
+    box-shadow: $box_sh2;
+    outline: none;
+  }
+}
+
+@mixin flex-center{
+  display: flex;
+  justify-content: center;
+}
