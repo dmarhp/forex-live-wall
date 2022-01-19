@@ -9,8 +9,8 @@ After user inputs a query string and presses the search button, the applications
 
 Data updating time frame could be changed by buttons at the top right of the wall.
 
+![Header](./public/demo.gif)
 ![Header](./public/demo1.gif)
-![Header](./public/demo2.gif)
 
 
 ## About
