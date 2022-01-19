@@ -3,7 +3,7 @@ import { APIData, RateData, StoreType } from '../utils/types';
 import { createInitialRateArray, createNewRate } from '../utils/utils';
 
 export const initialState: StoreType = {
-  timeFrame: 5,
+  timeFrame: 10,
   currentRate: { ticker: '' } as APIData,
   chartData: [] as RateData[],
 };
